@@ -1,0 +1,88 @@
+@host = http://localhost:9000
+
+POST {{host}}/api/admin
+Content-Type: application/json
+
+{
+  "idUsuario" : "12345",
+  "nombre" : "Luis West",
+  "correo" : "luis@west",
+  "direccion" : "Cieneguita"
+}
+
+###
+
+PATCH {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "idUsuario": "123",
+  "passw" : "123"
+}
+###
+
+PATCH {{host}}/api/auth/logout/luis@west
+Content-Type: application/json
+
+###
+
+POST {{host}}/api/profesor
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWItZGF0b3MiLCJpYXQiOjE3NTE0NzAzMDksImV4cCI6MTc1MTQ3MDkwOSwic3ViIjoibHVpc0B3ZXN0Iiwicm9sIjowLCJub20iOiJMdWlzIFdlc3QifQ.lk19d3XPaUiqVtFrKELuRpRjY0BfMW7YnqeQNwYfUVg
+
+{
+ "idUsuario": "1234567835",
+  "nombre": "Luis west",
+  "fecha_Ingreso":"2024-10-10",
+  "telefono":"77998899",
+  "genero":"M",
+  "curso": "Alquimia",
+  "correo": "luis@westgrs",
+  "direccion":"Limon - Cieneguita"
+}
+###
+
+GET {{host}}/api/profesor/read
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWItZGF0b3MiLCJpYXQiOjE3NTE0NDUwMDUsImV4cCI6MTc1MTQ0NTYwNSwic3ViIjoibHVpc0B3ZXN0Iiwicm9sIjowLCJub20iOiJMdWlzIFdlc3QifQ.YtdLS1mK0Ko4UgVlH_H3Xgf4H7oo1vcYvjw2CniqucI
+
+###
+
+
+
+POST {{host}}/api/doctor
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWItZGF0b3MiLCJpYXQiOjE3NTE0NzE2MjYsImV4cCI6MTc1MTQ3MjIyNiwic3ViIjoibHVpc0B3ZXN0Iiwicm9sIjowLCJub20iOiJMdWlzIFdlc3QifQ.mRnPZEkPdEcGCmeiDkZ95a4Fc4VZCx-6tua7aSjtKEE
+
+{
+  "idUsuario": "123",
+  "nombre": "Luis Lopez",
+  "especialidad":"Cirujano",
+  "correo": "luis@lopez",
+  "telefono": "0",
+  "celular": "72521812",
+  "ultima_consulta":"2024-10-10",
+  "direccion":"Limon"
+}
+
+
+###
+
+GET {{host}}/api/doctor/read
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWItZGF0b3MiLCJpYXQiOjE3NTE0ODE4NzQsImV4cCI6MTc1MTQ4MjQ3NCwic3ViIjoiMTIzIiwicm9sIjo1LCJub20iOiJMdWlzIExvcGV6In0.4qd_5qDOuZOno30GwsQSQALJE1VFCrIH94zZNyL8YIY
+###
+
+PUT {{host}}/api/doctor/123
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZWItZGF0b3MiLCJpYXQiOjE3NTE0ODE4NzQsImV4cCI6MTc1MTQ4MjQ3NCwic3ViIjoiMTIzIiwicm9sIjo1LCJub20iOiJMdWlzIExvcGV6In0.4qd_5qDOuZOno30GwsQSQALJE1VFCrIH94zZNyL8YIY
+
+{
+  "idUsuario": "123",
+  "nombre": "Luis Lopez",
+  "especialidad":"Cirujano",
+  "correo": "luis@lopez",
+  "telefono": "12341234",
+  "celular": "72521812",
+  "ultima_consulta":"2024-10-10",
+  "direccion":"Limon"
+}

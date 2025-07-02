@@ -1,0 +1,77 @@
+networks:
+  dto-red:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"
+services:
+  db:
+    image: mysql:latest
+    container_name: base_datos
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_DATABASE: examen
+      
+    ports:
+      - 3307:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./db-dump:/docker-entrypoint-initdb.d
+    secrets:
+      - db_password
+    networks:
+      dto-red:
+        ipv4_address: "192.168.0.10"
+  web-datos:
+    image: luiswestg/parcial2-datos:v0.3
+    container_name: servidor-datos
+    ports:
+      - 8000:80
+    depends_on:
+      - db
+    networks:
+      dto-red:
+        ipv4_address: "192.168.0.12"
+  web-negocio:
+    image: luiswestg/parcial2-negocio:v0.3
+    container_name: servidor-negocio
+    ports:
+      - 9000:80
+    depends_on:
+      - web-datos
+    networks:
+      dto-red:
+        ipv4_address: "192.168.0.13"
+#  web-presentacion:
+#    container_name: servidor-presentacion
+#    build:
+#      context: .
+#      dockerfile: ./presentacion/Dockerfile
+#    ports:
+#      - 80:80
+#    depends_on:
+#      - web-negocio
+#    networks:
+#      dto-red:
+#        ipv4_address: "192.168.0.14"  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    depends_on:
+      - db
+    networks:
+      dto-red:
+        ipv4_address: "192.168.0.11"      
+secrets:
+  db_password:
+    file: ./db_password.txt
+volumes:
+  db-dump:
+  mysql:
+  datos:
+  negocio:
